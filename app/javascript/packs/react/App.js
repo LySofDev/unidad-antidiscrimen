@@ -10,7 +10,10 @@ import { Form as LoginForm } from './components/Login'
 export default () => (
   <ApolloClientProvider>
     <MuiThemeProvider>
-      <LoginForm />
+      <div className="content">
+        <h1>Unidad Antidiscrimen</h1>
+        <LoginForm />
+      </div>
     </MuiThemeProvider>
   </ApolloClientProvider>
 )
