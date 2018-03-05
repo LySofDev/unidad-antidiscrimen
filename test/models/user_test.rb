@@ -4,7 +4,7 @@ class UserTest < ActiveSupport::TestCase
 
   test "The new user generator" do
     user = build(:user)
-    assert user
+    assert user.valid?
   end
 
   test "User has a first name" do
