@@ -22,3 +22,8 @@ storiesOf('Login Form', module)
       <LoginForm />
     </MuiThemeProvider>
   ))
+  .add('with an error', () => (
+    <MuiThemeProvider>
+      <LoginForm errors={["Email and Password don't match"]} />
+    </MuiThemeProvider>
+  ))
