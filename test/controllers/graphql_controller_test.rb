@@ -4,7 +4,7 @@ class GraphqlControllerTest < ActionDispatch::IntegrationTest
 
   test "It should provide the graphql endpoint" do
     post graphql_url
-    assert response.code == 200
+    assert_response :success
   end
 
 end
