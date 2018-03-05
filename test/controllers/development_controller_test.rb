@@ -1,8 +1,9 @@
 require 'test_helper'
 
 class DevelopmentControllerTest < ActionDispatch::IntegrationTest
-  test "should get index" do
-    get development_index_url
+
+  test "should get react client" do
+    get client_delivery_url
     assert_response :success
   end
 
