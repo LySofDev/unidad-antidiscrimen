@@ -10,4 +10,14 @@ Types::QueryType = GraphQL::ObjectType.define do
       "Hello World!"
     }
   end
+
+  field :currentUser, Types::UserType do
+    description "The currently authenticated user"
+    resolve -> (obj, args, ctx) do
+      user = ctx[:current_user]
+      return user if user
+      return OpenStruct.new({ errors: ["User not found."] })
+    end
+  end
+
 end
