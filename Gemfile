@@ -38,6 +38,7 @@ gem 'jbuilder', '~> 2.5'
 # Use Devise for User Authentication
 gem 'devise', '~> 4.3.0'
 gem 'graphql', '~> 1.7.13'
+gem 'json_web_token', '~> 0.3.5'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
