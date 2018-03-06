@@ -37,7 +37,7 @@ class UserQueriesTest < ActionDispatch::IntegrationTest
     assert result["data"]["currentUser"]["errors"] == ["User not found."], "No errors received"
   end
 
-  test "authenticateUser when Authorization header not included" do
+  test "authenticateUser when Authorization with valid credentials" do
     user = create(:user)
     result = execute_query({
       variables: { "email" => user.email, "password" => user.password },
@@ -60,6 +60,31 @@ class UserQueriesTest < ActionDispatch::IntegrationTest
     assert result["data"]["authenticateUser"], "No mutation received"
     token = result["data"]["authenticateUser"]["token"]
     assert token == AuthToken.token(user), "Invalid token"
+  end
+
+  test "authenticateUser when Authorization with invalid credentials" do
+    user = create(:user)
+    result = execute_query({
+      variables: { "email" => user.email, "password" => "invalid" },
+      query: "
+        mutation authenticateUser(
+          $email: String!,
+          $password: String!
+        ){
+          authenticateUser(
+            email: $email,
+            password: $password
+          ) {
+            token
+            errors
+          }
+        }
+      ",
+    })
+    assert result["data"], "No data received"
+    assert result["data"]["authenticateUser"], "No mutation received"
+    assert_not result["data"]["authenticateUser"]["token"], "Invalid token"
+    assert result["data"]["authenticateUser"]["errors"], "No errors received"
   end
 
   private
