@@ -5,7 +5,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import Cookies from 'js-cookie'
 import fetch from 'node-fetch'
 
-const httpLink = new HttpLink({ fetch, uri: "http://localhost:3000/grpahql" })
+const httpLink = new HttpLink({ fetch, uri: "http://localhost:3000/graphql" })
 
 const authMiddleware = new ApolloLink((operation, forward) => {
   operation.setContext({
