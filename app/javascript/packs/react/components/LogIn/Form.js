@@ -12,10 +12,21 @@ const styles = {
 export default props => (
   <Paper style={styles}>
     <Errors errors={props.errors} />
-    <TextField hintText="Email" floatingLabelText="Email" />
+    <TextField
+      value={props.form.email}
+      onChange={event => props.onUpdate('email', event.target.value)}
+      hintText="Email"
+      floatingLabelText="Email"
+    />
     <br />
-    <TextField hintText="Password" floatingLabelText="Password" type="password" />
+    <TextField
+      value={props.form.password}
+      onChange={event => props.onUpdate('password', event.target.value)}
+      hintText="Password"
+      floatingLabelText="Password"
+      type="password"
+    />
     <br />
-    <RaisedButton label="Sign In" primary />
+    <RaisedButton label="Sign In" primary onClick={props.onSubmit} />
   </Paper>
 )
