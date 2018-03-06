@@ -5,7 +5,3 @@ require 'rails/test_help'
 class ActiveSupport::TestCase
   include FactoryBot::Syntax::Methods
 end
-#
-# class Test::Unit::TestCase
-#   include FactoryBot::Syntax::Methods
-# end

@@ -39,6 +39,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise', '~> 4.3.0'
 gem 'graphql', '~> 1.7.13'
 gem 'json_web_token', '~> 0.3.5'
+gem 'rack-cors', require: 'rack/cors'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
