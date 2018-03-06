@@ -15,7 +15,6 @@ class AuthenticateUser extends React.Component {
   }
 
   authenticationQuery(credentials) {
-    console.log(credentials)
     return this.props.apollo.mutate({
       mutation: gql`
         mutation authenticateUser(
