@@ -3,18 +3,18 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import { linkTo } from '@storybook/addon-links'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
-import Errors from '../app/javascript/packs/react/components/Errors'
+import Errors from '../app/javascript/packs/Errors'
+import StoriesProvider from '../app/javascript/packs/StoriesProvider'
 
 storiesOf('Errors', module)
   .add('with a single error', () => (
-    <MuiThemeProvider>
+    <StoriesProvider>
       <Errors errors={["A single error"]} />
-    </MuiThemeProvider>
+    </StoriesProvider>
   ))
   .add('with multiple errors', () => (
-    <MuiThemeProvider>
+    <StoriesProvider>
       <Errors errors={["A first error", "A second error"]} />
-    </MuiThemeProvider>
+    </StoriesProvider>
   ))

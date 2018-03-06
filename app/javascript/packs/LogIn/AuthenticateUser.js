@@ -26,6 +26,7 @@ const enhance = compose(
           const { authenticateUser } = response.data
           if (authenticateUser.token) {
             props.updateFlash("Signed in successfully.")
+            props.onSuccess(authenticateUser.token)
           }
           if (authenticateUser.errors) {
             return props.setErrors(response.data.authenticateUser.errors)
@@ -33,6 +34,7 @@ const enhance = compose(
           return props.setErrors(["No data received from server."])
         })
         .catch(error => props.setErrors([error]))
+        return state
     }
   )
 

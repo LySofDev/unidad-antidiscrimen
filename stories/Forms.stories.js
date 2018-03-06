@@ -3,30 +3,30 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import { linkTo } from '@storybook/addon-links'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
-import LoginForm from '../app/javascript/packs/react/components/LogIn/Form'
+import LoginForm from '../app/javascript/packs/LogIn/Form'
+import StoriesProvider from '../app/javascript/packs/StoriesProvider'
 
 storiesOf('Login Form', module)
   .add('default', () => (
-    <MuiThemeProvider>
+    <StoriesProvider>
       <LoginForm
         form={{ email: "", password: ""}}
       />
-    </MuiThemeProvider>
+    </StoriesProvider>
   ))
   .add('with enterred data', () => (
-    <MuiThemeProvider>
+    <StoriesProvider>
       <LoginForm
         form={{ email: "test@gmail.com", password: "password "}}
       />
-    </MuiThemeProvider>
+    </StoriesProvider>
   ))
   .add('with an error', () => (
-    <MuiThemeProvider>
+    <StoriesProvider>
       <LoginForm
         form={{ email: "test@gmail.com", password: "password "}}
         errors={["Email and Password wont match"]}
       />
-    </MuiThemeProvider>
+    </StoriesProvider>
   ))

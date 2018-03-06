@@ -1,11 +1,10 @@
 import React from 'react'
 import Paper from 'material-ui/Paper'
 import { withState } from 'recompose'
-import { RED } from '../../constants'
 
 const styles = {
   padding: "1rem",
-  background: RED,
+  background: "#FF596D",
   color: "white"
 }
 
