@@ -1,47 +1,68 @@
 import React from 'react'
-import { compose, withStateHandlers, getContext, withHandlers, withState } from 'recompose'
-import PropTypes from 'prop-types'
+import { getApolloClient } from '../ApolloClientProvider'
+import gql from 'graphql-tag'
 
-import { withErrors } from '../Errors'
 
-import withAuthenicateUserMutation from './withAuthenticateUserMutation'
-
-import withFormState from './withFormState'
-
-import { withUpdateFlash } from '../Flash'
-
-const enhance = compose(
-
-  withErrors,
-
-  withUpdateFlash,
-
-  withAuthenicateUserMutation,
-
-  withFormState(
-    { email: "", password: "" },
-    (form, props) => {
-      props.authenticateUser(form)
-        .then(response => {
-          const { authenticateUser } = response.data
-          if (authenticateUser.token) {
-            props.updateFlash("Signed in successfully.")
-            props.onSuccess(authenticateUser.token)
-          }
-          if (authenticateUser.errors) {
-            return props.setErrors(response.data.authenticateUser.errors)
-          }
-          return props.setErrors(["No data received from server."])
-        })
-        .catch(error => props.setErrors([error]))
-        return state
+class AuthenticateUser extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      errors: []
     }
-  )
-
-)
-
-export default enhance(
-  ({ form, errors, updateField, submitForm, children }) => {
-    return children({ form, errors, updateField, submitForm })
+    this.authenticationQuery = this.authenticationQuery.bind(this)
+    this.authenticateUser = this.authenticateUser.bind(this)
+    this.handleResponse = this.handleResponse.bind(this)
   }
-)
+
+  authenticationQuery(credentials) {
+    console.log(credentials)
+    return this.props.apollo.mutate({
+      mutation: gql`
+        mutation authenticateUser(
+          $email: String!,
+          $password: String!
+        ) {
+          authenticateUser(
+            email: $email,
+            password: $password
+          ) {
+            token
+            errors
+          }
+        }
+      `,
+      variables: {...credentials}
+    })
+  }
+
+  handleResponse(response) {
+    const authenticateUser = response.data.authenticateUser
+    if (authenticateUser && authenticateUser.token) {
+      this.setState({ errors: [] })
+      this.props.onSuccess(authenticateUser.token)
+    } else if (authenticateUser && authenticateUser.errors) {
+      this.setState({ errors: authenticateUser.errors})
+    } else {
+      this.setState({ errors: ["Invalid email or password."] })
+    }
+  }
+
+  authenticateUser(credentials) {
+    this.authenticationQuery(credentials)
+      .then(this.handleResponse)
+      .catch(error => this.setState({ errors: [error] }))
+  }
+
+  render() {
+    const strategy = this.props.strategy
+    if (strategy) {
+      return strategy({
+        authenticateUser: this.authenticateUser,
+        errors: this.state.errors
+      })
+    }
+    return null
+  }
+}
+
+export default getApolloClient(AuthenticateUser)
