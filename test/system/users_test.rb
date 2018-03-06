@@ -25,14 +25,14 @@ class UsersTest < ApplicationSystemTestCase
     assert page.has_content? 'Signed in successfully.'
   end
 
-  # test "User can sign in on the React client" do
-  #   user = create(:user)
-  #   visit client_delivery_url
-  #   fill_in 'Email', with: user.email
-  #   fill_in 'Password', with: user.password
-  #   click_on 'Sign In'
-  #   assert_not page.has_content? 'errors prohibited this user from being saved'
-  #   assert page.has_content? 'Signed in successfully.'
-  # end
+  test "User can sign in on the React client" do
+    user = create(:user)
+    visit client_delivery_url
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
+    click_on 'Sign In'
+    assert_not page.has_content? 'errors prohibited this user from being saved'
+    assert page.has_content? 'Signed in successfully.'
+  end
 
 end
