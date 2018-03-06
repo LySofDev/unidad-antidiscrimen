@@ -6,14 +6,18 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import ApolloClientProvider from './components/ApolloClientProvider'
 
 import LoginForm from './components/LogIn'
+import { FlashProvider, Flash } from './components/Flash'
 
 export default () => (
   <ApolloClientProvider>
     <MuiThemeProvider>
-      <div className="content">
-        <h1>Unidad Antidiscrimen</h1>
-        <LoginForm />
-      </div>
+      <FlashProvider>
+        <div className="content">
+          <h1>Unidad Antidiscrimen</h1>
+          <LoginForm />
+          <Flash />
+        </div>
+      </FlashProvider>
     </MuiThemeProvider>
   </ApolloClientProvider>
 )

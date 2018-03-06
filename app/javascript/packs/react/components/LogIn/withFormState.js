@@ -12,6 +12,7 @@ export default function(defaultState, callback) {
         })
       }),
       submitForm: (state, props) => event => {
+        event.preventDefault()
         callback(state.form, props)
         return state
       }

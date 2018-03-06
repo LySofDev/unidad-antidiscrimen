@@ -8,9 +8,13 @@ import withAuthenicateUserMutation from './withAuthenticateUserMutation'
 
 import withFormState from './withFormState'
 
+import { withUpdateFlash } from '../Flash'
+
 const enhance = compose(
 
   withErrors,
+
+  withUpdateFlash,
 
   withAuthenicateUserMutation,
 
@@ -21,7 +25,7 @@ const enhance = compose(
         .then(response => {
           const { authenticateUser } = response.data
           if (authenticateUser.token) {
-            return console.log(response.data.authenticateUser.token)
+            props.updateFlash("Signed in successfully.")
           }
           if (authenticateUser.errors) {
             return props.setErrors(response.data.authenticateUser.errors)
