@@ -4,29 +4,57 @@ import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import { linkTo } from '@storybook/addon-links'
 
-import LoginForm from '../app/javascript/packs/LogIn/Form'
 import StoriesProvider from '../app/javascript/packs/StoriesProvider'
 
-storiesOf('Login Form', module)
-  .add('default', () => (
+import { FormField, FormContainer, FormState } from '../app/javascript/packs/Form'
+
+storiesOf("FormField", module)
+  .add("default", () => (
     <StoriesProvider>
-      <LoginForm
-        form={{ email: "", password: ""}}
+      <FormField
+        title="Text Field"
+        value=""
       />
     </StoriesProvider>
   ))
-  .add('with enterred data', () => (
+
+storiesOf("FormContainer", module)
+  .add("default", () => (
     <StoriesProvider>
-      <LoginForm
-        form={{ email: "test@gmail.com", password: "password "}}
-      />
+      <FormContainer
+        primaryLabel="Sign Up"
+        secondaryLabel="Already a member?"
+      >
+        <FormField
+          title="Text Field"
+          value=""
+        />
+      </FormContainer>
     </StoriesProvider>
   ))
-  .add('with an error', () => (
+
+storiesOf("FormState", module)
+  .add("default", () => (
     <StoriesProvider>
-      <LoginForm
-        form={{ email: "test@gmail.com", password: "password "}}
-        errors={["Email and Password wont match"]}
+      <FormState
+        component={({ form, updateField }) => (
+          <FormContainer
+            primaryLabel="Sign In"
+            secondaryLabel="Not registered yet?"
+          >
+            <FormField
+              title="Email"
+              value={form.email}
+              onChange={value => updateField('email', value)}
+            />
+            <br />
+            <FormField
+              title="Password"
+              value={form.password}
+              onChange={value => updateField('password', value)}
+            />
+          </FormContainer>
+        )}
       />
     </StoriesProvider>
   ))

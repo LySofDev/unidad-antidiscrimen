@@ -1,11 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from '../App'
-import FormState from '../FormState'
-import AuthenticateUser from './AuthenticateUser'
-import LoginForm from './Form'
 import StoredToken from '../StoredToken'
 import { withRouter } from '../RouterProvider'
+import AuthenticateUser from './AuthenticateUser'
+import { FormState, FormContainer, FormField } from '../Form'
 
 const Page = withRouter(({ redirectTo }) => {
   return (
@@ -18,12 +17,26 @@ const Page = withRouter(({ redirectTo }) => {
             <FormState
               initialState={{ email: "", password: "" }}
               component={({ form, updateField }) => (
-                <LoginForm
-                  form={form}
+                <FormContainer
                   errors={errors}
-                  onUpdate={updateField}
-                  onSubmit={event => authenticateUser(form)}
-                />
+                  primaryLabel="Sign Up"
+                  onPrimary={event => authenticateUser(form)}
+                  secondaryLabel="Not registered yet?"
+                  onSecondary={event => redirectTo("/users/sign_up")}
+                >
+                  <FormField
+                    title="Email"
+                    value={form.email}
+                    onChange={value => updateField('email', value)}
+                  />
+                  <br />
+                  <FormField
+                    title="password"
+                    value={form.password}
+                    onChange={value => updateField('password', value)}
+                  />
+                  <br />
+                </FormContainer>
               )}
             />
           )}

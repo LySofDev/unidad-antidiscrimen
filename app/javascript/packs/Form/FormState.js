@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default class FormState extends React.Component {
+class FormState extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -28,3 +28,5 @@ export default class FormState extends React.Component {
     return null
   }
 }
+
+export default FormState
