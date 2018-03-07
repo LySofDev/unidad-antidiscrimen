@@ -2,7 +2,6 @@ import React from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
 import Paper from 'material-ui/Paper'
 import FlatButton from 'material-ui/FlatButton'
-import Errors from '../Errors'
 
 const styles = {
   container: {
@@ -19,7 +18,6 @@ const styles = {
 
 export default props => (
   <Paper style={styles.container}>
-    <Errors errors={props.errors} />
     {props.children}
     <br />
     <RaisedButton

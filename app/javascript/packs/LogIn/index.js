@@ -2,50 +2,48 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from '../App'
 import StoredToken from '../StoredToken'
+import Errors from '../Errors'
 import { withRouter } from '../RouterProvider'
 import AuthenticateUser from './AuthenticateUser'
 import { FormState, FormContainer, FormField } from '../Form'
 
-const Page = withRouter(({ redirectTo }) => {
-  return (
-    <StoredToken
-      ifValidToken={() => redirectTo("/")}
-      unlessValidToken={({ updateToken }) => (
-        <AuthenticateUser
-          onSuccess={updateToken}
-          strategy={({ authenticateUser, errors }) => (
-            <FormState
-              initialState={{ email: "", password: "" }}
-              component={({ form, updateField }) => (
-                <FormContainer
-                  errors={errors}
-                  primaryLabel="Sign Up"
-                  onPrimary={event => authenticateUser(form)}
-                  secondaryLabel="Not registered yet?"
-                  onSecondary={event => redirectTo("/users/sign_up")}
-                >
-                  <FormField
-                    title="Email"
-                    value={form.email}
-                    onChange={value => updateField('email', value)}
-                  />
-                  <br />
-                  <FormField
-                    title="password"
-                    value={form.password}
-                    onChange={value => updateField('password', value)}
-                  />
-                  <br />
-                </FormContainer>
-              )}
-            />
-          )}
-        />
-      )}
-    />
-  )
-
-})
+const Page = withRouter(({ redirectTo }) => (
+  <StoredToken
+    ifValidToken={() => redirectTo("/")}
+    unlessValidToken={({ updateToken }) => (
+      <AuthenticateUser
+        onSuccess={updateToken}
+        strategy={({ authenticateUser, errors }) => (
+          <FormState
+            initialState={{ email: "", password: "" }}
+            component={({ form, updateField }) => (
+              <FormContainer
+                primaryLabel="Sign Up"
+                onPrimary={event => authenticateUser(form)}
+                secondaryLabel="Not registered yet?"
+                onSecondary={event => redirectTo("/users/sign_up")}
+              >
+                <Errors errors={errors} />
+                <FormField
+                  title="Email"
+                  value={form.email}
+                  onChange={value => updateField('email', value)}
+                />
+                <br />
+                <FormField
+                  title="password"
+                  value={form.password}
+                  onChange={value => updateField('password', value)}
+                />
+                <br />
+              </FormContainer>
+            )}
+          />
+        )}
+      />
+    )}
+  />
+))
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
