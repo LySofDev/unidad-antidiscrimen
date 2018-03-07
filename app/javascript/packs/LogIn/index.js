@@ -18,7 +18,7 @@ const Page = withRouter(({ redirectTo }) => (
             initialState={{ email: "", password: "" }}
             component={({ form, updateField }) => (
               <FormContainer
-                primaryLabel="Sign Up"
+                primaryLabel="Sign In"
                 onPrimary={event => authenticateUser(form)}
                 secondaryLabel="Not registered yet?"
                 onSecondary={event => redirectTo("/users/sign_up")}
@@ -31,7 +31,7 @@ const Page = withRouter(({ redirectTo }) => (
                 />
                 <br />
                 <FormField
-                  title="password"
+                  title="Password"
                   value={form.password}
                   onChange={value => updateField('password', value)}
                 />
