@@ -29,4 +29,12 @@ class UserServicesTest < ActionDispatch::IntegrationTest
     assert payload.errors.any?, "No errors were received"
   end
 
+  test "RegisterUser with valid information" do
+    params = attributes_for(:user)
+    payload = Services::Users::RegisterUser.new(params).perform
+    assert payload.user, "No user was received."
+    assert payload.user.persisted?, "User was created but not saved."
+    assert payload.errors.empty?, "Errors were received."
+  end
+
 end
