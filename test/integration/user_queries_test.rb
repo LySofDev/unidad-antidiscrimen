@@ -87,6 +87,46 @@ class UserQueriesTest < ActionDispatch::IntegrationTest
     assert result["data"]["authenticateUser"]["errors"], "No errors received"
   end
 
+  test "registerUser with valid credentials" do
+    user = build(:user)
+    result = execute_query({
+      variables: {
+        "firstName" => user.first_name,
+        "lastName" => user.last_name,
+        "email" => user.email,
+        "password" => user.password,
+        "passwordConfirmation" => user.password_confirmation
+      },
+      query: "
+        mutation registerUser(
+          $email: String!,
+          $firstName: String!,
+          $lastName: String!,
+          $password: String!,
+          $passwordConfirmation: String!
+        ) {
+          registerUser(
+            email: $email,
+            password: $password,
+            passwordConfirmation: $passwordConfirmation,
+            firstName: $firstName,
+            lastName: $lastName
+          ) {
+            token
+            errors
+          }
+        }
+      "
+    })
+    assert result["data"], "No data received."
+    assert result["data"]["registerUser"], "No query received"
+    token = result["data"]["registerUser"]["token"]
+    assert token, "No token received"
+    user = User.find_by_email(user.email)
+    assert user, "User not registered"
+    assert token == AuthToken.token(user), "Invalid token created"
+  end
+
   private
 
   def execute_query(opts)
