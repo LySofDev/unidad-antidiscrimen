@@ -10,7 +10,7 @@ class UsersTest < ApplicationSystemTestCase
     click_on 'Sign In'
     assert_not (page.has_content? 'Invalid email or password'), 'Errors ocurred in the form'
     assert_selector 'div', text: 'Unidad Antidiscrimen'
-    # assert (page.has_content? 'Signed in successfully.'), 'Flash was not shown.'
+    assert (page.has_content? 'Signed in successfully.'), 'Flash was not shown.'
   end
 
   test 'User cannot sign in with invalid credentials' do
@@ -34,6 +34,6 @@ class UsersTest < ApplicationSystemTestCase
     fill_in 'Password Confirmation', with: user.password
     click_on 'Sign Up'
     assert_not (page.has_css? 'div.errors'), 'Errors being shown'
-    assert (page.has_content? 'Signed up successfully!'), 'Sign in was not successful.'
+    assert (page.has_content? 'Signed up successfully.'), 'Sign in was not successful.'
   end
 end

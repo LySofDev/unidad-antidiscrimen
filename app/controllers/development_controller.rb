@@ -1,6 +1,7 @@
 class DevelopmentController < ApplicationController
 
   def index
+
   end
 
   def notice_flash

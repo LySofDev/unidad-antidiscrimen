@@ -9,7 +9,7 @@ import { FormState, FormContainer, FormField } from '../Form'
 
 const Page = withRouter(({ redirectTo }) => (
   <StoredToken
-    ifValidToken={() => redirectTo("/")}
+    ifValidToken={() => redirectTo("/?ntc=4001")}
     unlessValidToken={({ updateToken }) => (
       <AuthenticateUser
         onSuccess={updateToken}
@@ -34,6 +34,7 @@ const Page = withRouter(({ redirectTo }) => (
                   title="Password"
                   value={form.password}
                   onChange={value => updateField('password', value)}
+                  type="password"
                 />
                 <br />
               </FormContainer>

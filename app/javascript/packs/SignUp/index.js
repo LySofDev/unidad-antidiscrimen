@@ -9,7 +9,7 @@ import RegisterUser from './RegisterUser'
 
 const Page = withRouter(({ redirectTo }) => (
   <StoredToken
-    ifValidToken={() => redirectTo("/")}
+    ifValidToken={() => redirectTo("/?ntc=4002")}
     unlessValidToken={ ({ updateToken }) => (
       <RegisterUser
         onSuccess={updateToken}
@@ -53,12 +53,14 @@ const Page = withRouter(({ redirectTo }) => (
                   title="Password"
                   value={form.password}
                   onChange={value => updateField('password', value)}
+                  type="password"
                 />
                 <br />
                 <FormField
                   title="Password Confirmation"
                   value={form.passwordConfirmation}
                   onChange={value => updateField('passwordConfirmation', value)}
+                  type="password"
                 />
                 <br />
               </FormContainer>
