@@ -35,6 +35,17 @@ class FlashMessage extends React.Component {
     this.state = {
       open: this.props.flashMessage.length > 0
     }
+    this.dismiss = this.dismiss.bind(this)
+    this.extractMessage = this.extractMessage.bind(this)
+  }
+
+  componentWillMount() {
+    const flash = {
+      alert: this.extractMessage('alert'),
+      notice: this.extractMessage('notice')
+    }
+    if (flash.alert.length > 0) this.props.updateFlash(flash.alert)
+    else if (flash.notice.length > 0) this.props.updateFlash(flash.notice)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -45,16 +56,22 @@ class FlashMessage extends React.Component {
     }
   }
 
-  dissmiss(event) {
+  extractMessage(key) {
+    const element = document.getElementById(key)
+    return element ? element.value : ''
+  }
+
+  dismiss(event) {
     this.props.updateFlash("")
   }
 
   render() {
     return (
       <Snackbar
+        className="flash-message"
         open={this.state.open}
         message={this.props.flashMessage}
-        onClick={this.dissmiss.bind(this)}
+        onClick={this.dismiss}
       />
     )
   }
