@@ -10,13 +10,13 @@ document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
     <App>
       <StoredToken
-        unlessValidToken={ ({ updateToken }) => (
+        unlessValidToken={({ updateToken }) => (
           <AuthenticateUser
-            onSuccess={ token => updateToken(token) }
-            strategy={ ({ authenticateUser, errors }) => (
+            onSuccess={updateToken}
+            strategy={({ authenticateUser, errors }) => (
               <FormState
                 initialState={{ email: "", password: "" }}
-                component={ ({ form, updateField }) => (
+                component={({ form, updateField }) => (
                   <LoginForm
                     form={form}
                     errors={errors}
