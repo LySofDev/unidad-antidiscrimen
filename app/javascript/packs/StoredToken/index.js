@@ -39,6 +39,7 @@ class StoredToken extends React.Component {
   }
 
   componentWillMount() {
+    console.log(Cookies.get('token'))
     this.tokenValidationQuery()
       .then(this.handleResponse)
       .catch(error => console.log(error))
