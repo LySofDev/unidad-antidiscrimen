@@ -9,7 +9,7 @@ import RegisterUser from './RegisterUser'
 
 const Page = withRouter(({ redirectTo }) => (
   <StoredToken
-    ifValidToken={() => redirectTo("/?ntc=4002")}
+    ifValidToken={() => redirectTo("/", { notice: "4002" })}
     unlessValidToken={ ({ updateToken }) => (
       <RegisterUser
         onSuccess={updateToken}

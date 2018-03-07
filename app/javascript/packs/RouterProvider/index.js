@@ -7,8 +7,11 @@ const routerProps = { redirectTo: PropTypes.func.isRequired }
 const enhance = compose(
 
   withHandlers({
-    redirectTo: props => path => {
-      window.location.href = "http://localhost:3000" + path
+    redirectTo: props => (path, opts = {}) => {
+      let url = "http://localhost:3000" + path + "/?"
+      if (opts.alert) url += "alt=" + opts.alert + "&"
+      if (opts.notice) url += "ntc=" + opts.notice + "&"
+      window.location.href = url
     }
   }),
 
