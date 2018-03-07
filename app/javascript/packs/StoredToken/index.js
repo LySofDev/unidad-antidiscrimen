@@ -46,7 +46,7 @@ class StoredToken extends React.Component {
 
   componentWillUpdate(props, state) {
     if (state.validated) {
-      window.location.href = "http://localhost:3000/"
+      props.ifValidToken()
       return false
     }
     return true

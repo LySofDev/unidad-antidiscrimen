@@ -1,15 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from '../App'
-import FormState from './FormState'
+import FormState from '../FormState'
 import AuthenticateUser from './AuthenticateUser'
 import LoginForm from './Form'
-import StoredToken from './StoredToken'
+import StoredToken from '../StoredToken'
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
     <App>
       <StoredToken
+        ifValidToken={() => { window.location.href = "http://localhost:3000/" }}
         unlessValidToken={({ updateToken }) => (
           <AuthenticateUser
             onSuccess={updateToken}

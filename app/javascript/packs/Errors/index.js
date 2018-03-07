@@ -12,5 +12,5 @@ export const withErrors = withState('errors', 'setErrors', [])
 
 export default ({ errors }) => {
   if (!errors || errors.length === 0) return null
-  return (<Paper style={styles}>{errors[0]}</Paper>)
+  return (<Paper className="errors" style={styles}>{errors[0]}</Paper>)
 }
