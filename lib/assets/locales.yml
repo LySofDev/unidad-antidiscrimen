@@ -1,2 +1,6 @@
-- en
-- es
+en:
+  name: English
+  literal: English
+es:
+  name: Spanish
+  literal: Español

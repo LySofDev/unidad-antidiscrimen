@@ -8,8 +8,12 @@ class SupportedLocaleValidator < ActiveModel::EachValidator
 
   private
 
-  def supported_locales
+  def locales_dataset
     YAML.load(open(Rails.root.join("lib", "assets", "locales.yml")))
   end
-  
+
+  def supported_locales
+    locales_dataset.keys
+  end
+
 end
