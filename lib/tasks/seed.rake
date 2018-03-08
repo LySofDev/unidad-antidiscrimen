@@ -15,4 +15,19 @@ namespace :seed do
     puts "Total causes: #{Cause.count}"
   end
 
+  desc "Seed all of the laws"
+  task :laws => :environment do
+    laws = YAML.load(open(Rails.root.join("lib", "assets", "laws.yml")))
+    laws = laws.inject([]) do |memo, law|
+      law.last.keys.each do |locale|
+        memo << { title: law.last[locale], locale: locale }
+      end
+      memo
+    end
+    Law.create(laws)
+    puts "English laws: #{Law.where(locale: "en").count}"
+    puts "Spanish laws: #{Law.where(locale: "es").count}"
+    puts "Total laws: #{Law.count}"
+  end
+
 end
