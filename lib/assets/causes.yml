@@ -1,2 +1,66 @@
-- foo
-- bar
+race:
+  en: race
+  es: raza
+color:
+  en: color
+  es: color
+national_origin:
+  en: national origin
+  es: origen nacional
+political_ideology:
+  en: political ideology
+  es: ideales políticos
+religious_ideology:
+  en: religious ideology
+  es: ideas religiosas
+marriage:
+  en: marriage
+  es: matrimonio
+disability:
+  en: disability
+  es: discapacidad
+military:
+  en: military
+  es: militar
+veteran:
+  en: veteran
+  es: veterano
+age:
+  en: age
+  es: edad
+social_condition:
+  en: social condition
+  es: condición social
+criminal_background:
+  en: criminal background
+  es: antecedentes penales
+gender:
+  en: gender
+  es: género
+pregnancy:
+  en: pregnancy
+  es: embarazo
+breast_feeding:
+  en: breast feeding
+  es: lactancia
+sexual_harrasment:
+  en: sexual harrasment
+  es: hostigamiento sexual
+gender_stereotype:
+  en: gender stereotype
+  es: estereotipo por género
+sexual_orientation:
+  en: sexual orientation
+  es: orientación sexual
+gender_identity:
+  en: gender identity
+  es: identidad de género
+domestic_violence:
+  en: domestic violence
+  es: violencia doméstica
+sexual_aggression:
+  en: sexual aggression
+  es: agresión sexual
+stalking:
+  en: stalking
+  es: acecho

@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :cause do
-    name "MyString"
+    name { Faker::Lorem.word }
+    locale :en
   end
 end
