@@ -49,6 +49,7 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'factory_bot_rails', '~> 4.8.2'
   gem 'graphiql-rails'
+  gem 'faker', '~> 1.8.7'
 end
 
 group :development do
